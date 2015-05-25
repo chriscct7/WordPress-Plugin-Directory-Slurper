@@ -18,10 +18,10 @@ Requirements
 How does this differ from Mark's and/or Rarst's version?
 ------------
 
-Mark -> Rarst:
+Mark > Rarst:
 * Changed from wget to curl so it can be used on any platform (not just Unix based ones)
 
-Rarst->Mine:
+Rarst > Mine:
 * Added pthread to thread the download and processing (dramatically improved performance). 
 * Used curl's curl_multi_exec to allow for multiple parallel downloads (dramatically improves performance)
 
