@@ -6,22 +6,37 @@ version of every plugin in the [WordPress.org plugin repository][repo].
 
 Really handy for doing local searches across all WordPress plugins.
 
-[repo]: http://wordpress.org/extend/plugins/
+Based on [Mark Jaquith's project](https://github.com/markjaquith/WordPress-Plugin-Directory-Slurper/) and [Rarst's fork](https://github.com/Rarst/WordPress-Plugin-Directory-Slurper/)
 
 Requirements
 ------------
 
 * PHP 5.2
-* wget
-* Unix system (only tested on Mac OS X)
+* Curl
+* pthreads
+
+How does this differ from Mark's and/or Rarst's version?
+------------
+
+Mark -> Rarst:
+* Changed from wget to curl so it can be used on any platform (not just Unix based ones)
+
+Rarst->Mine:
+* Added pthread to thread the download and processing (dramatically improved performance). 
+* Used curl's curl_multi_exec to allow for multiple parallel downloads (dramatically improves performance)
+
+Unlike Mark's and Rarst's versions, which need to be left overnight to finish, this version can finish in about 30 - 60 minutes for code checkouts and 15 - 30 minutes for readme checkouts. It's much faster than any other version or fork, including the [parallel wget requests](https://github.com/markjaquith/WordPress-Plugin-Directory-Slurper/pull/12) one. That fork is 12x faster than Mark's version. This one is 2x the speed of that one, or roughly 24x the speed of Mark's.
+
 
 Instructions
 ------------
+If you don't already have it, you need to install and activate the PHP pthreads extension.
 
 1. `cd WordPress-Plugin-Directory-Slurper`
-2. `./update`
+2. `php update.php`
 
-The `plugins/` directory will contain all the plugins, when the script is done.
+The `plugins/` directory will contain all the plugins, when the script is done if you asked for all.
+The `readmes/` directory will contain all the readmes, when the script is done if you asked for readmes.
 
 FAQ
 ----
@@ -40,7 +55,8 @@ out and gives you the latest stable version
 
 ### How long will it take? ###
 
-Your first update will take a while. You'd be well-advised to let it run overnight. 
+Your first update will take much longer than any other (about 30 - 60 minutes for code checkouts and 15 - 30 minutes for readme checkouts)
+
 But subsequent updates are smart. The script tracks the SVN revision number of your
 latest update and then asks the Plugins Trac install for a list of plugins that have 
 changed since. Only those changed plugins are updated after the initial sync.
@@ -56,7 +72,7 @@ You can just overwrite that and the next `update` will start after that revision
 
 Copyright & License
 -------------------
-Copyright (C) 2011 Mark Jaquith
+Copyright (C) 2015 Chris Christoff
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
