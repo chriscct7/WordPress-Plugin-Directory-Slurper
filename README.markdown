@@ -2,7 +2,7 @@ WordPress Plugin Directory Slurper
 ==================================
 
 A command line PHP script that downloads and updates a copy of the latest stable
-version of every plugin in the [WordPress.org plugin repository][repo].
+version of every plugin in the WordPress.org plugin repository.
 
 Really handy for doing local searches across all WordPress plugins.
 
